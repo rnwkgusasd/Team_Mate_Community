@@ -6,8 +6,7 @@ const userSchema=new mongoose.Schema({
     writer:{ type: String },
     docNum:{ type: Number, unique: true, index: true },
     viewCnt:{ type: Number, default:0 },
-    likeCnt:{ type: Number, default:0 },
-    rpl:{ type: String, default:''},
+    likeCnt:{ type: Number, default:0 }
 
 })
 

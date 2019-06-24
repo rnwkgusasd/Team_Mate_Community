@@ -5,5 +5,5 @@ var router=express.Router();
 module.exports=router;
 
 router.get('/',function(req,res,next){
-    res.send({msg:'Linked comm'})
+    res.send({msg:'Linked rpl'})
 })
