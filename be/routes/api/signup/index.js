@@ -34,7 +34,7 @@ router.post('/', (req, res, next) => {
     console.log(req.body)
     res.send({ success: true, msg: 'post ok' })
   });
-  router.post('/:id', (req, res, next) => {
+  router.post('/:id', (req, res, next) => {    //사용자가 댓글을 추가했을 때 likeDoc배열에 내용 추가할 때 사용
     const id = req.params.id
     var push1 = Signup.findOne({_id: id})
     push1.likeDoc.push({likeDocid:req.docNum});
