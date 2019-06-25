@@ -23,9 +23,11 @@ router.post('/users', function(req, res, next) {
   res.send({ msg: 'hello', a: 1 })
 });
 
-router.use('/signup',require('./signup'));
 router.use('/comm',require('./comm'));
 router.use('/rpl',require('./rpl'));
+router.use('/signup',require('./signup'));
+
+
 
 router.all('*', function(req, res, next) {
   next(createError(404, 'API를 찾을 수 없습니다.'));
