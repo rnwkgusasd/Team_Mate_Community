@@ -7,5 +7,3 @@ const userSchema = new mongoose.Schema({
     likeDoc: [new mongoose.Schema({likeDocid: {type:String ,default: '' }})]
 })
 const UserModel = mongoose.model('UserModel', userSchema)
-
-module.exports = UserModel
