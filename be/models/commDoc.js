@@ -7,7 +7,6 @@ const userSchema=new mongoose.Schema({
     docNum:{ type: Number, unique: true, index: true },
     viewCnt:{ type: Number, default:0 },
     likeCnt:{ type: Number, default:0 }
-
 })
 
 const commDoc=mongoose.model('commDoc',userSchema)

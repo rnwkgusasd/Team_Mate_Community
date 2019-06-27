@@ -56,8 +56,6 @@ module.exports = app;
 //몽구스 연결
 
 const mongoose = require('mongoose')
-
-const User = require('./models/users')
 const UserData = require('./models/signupM')
 //console.log(User)
 
