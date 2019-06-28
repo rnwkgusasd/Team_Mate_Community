@@ -1,11 +1,11 @@
 const mongoose=require('mongoose')
 
 const userSchema=new mongoose.Schema({
-    docNum:{type:Number,unique:true,index:true},
+    docNum:{type:Number},
     writer:{type:String},
     desc:{type:String,default:''},
-    rplNum:{type:Number}
+    rplNum:{type:Number,unique:true,index:true}
 })
 
-const Rpl=mongoose.model('Rpl',userSchema)
-module.exports(Rpl)
+const CommRpl=mongoose.model('Rpl',userSchema)
+module.exports=CommRpl

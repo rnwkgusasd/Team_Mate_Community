@@ -4,10 +4,8 @@ var router=express.Router();
 const CommDoc = require('../../../models/commDoc')
 
 
-module.exports = router;
-
 router.get('/', function(req, res, next) {
-    Signup.find()
+    CommDoc.find()
       .then(r => {
         res.send({ success : true, commDoc: r})
       })
@@ -60,11 +58,8 @@ router.get('/', function(req, res, next) {
   });
 
   
-module.exports = router;
-var router=express.Router();
-
 module.exports=router;
 
-router.get('/',function(req,res,next){
-    res.send({msg:'Linked comm'})
-})
+// router.get('/',function(req,res,next){
+//     res.send({msg:'Linked comm'})
+// })
