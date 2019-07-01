@@ -69,7 +69,7 @@ const commRpl=require('./models/commRpl')
 //
 // const User = mongoose.model('User', userSchema)
 
-mongoose.connect('mongodb://localhost:27017/local', { useNewUrlParser: true }, (err) => {
+mongoose.connect('mongodb://localhost:27017/api', { useNewUrlParser: true }, (err) => {
    if (err) return console.error(err)
    console.log('mongoose connected!')
 
