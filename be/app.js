@@ -8,6 +8,10 @@ const cors = require('cors'); //cors 설정
 
 var app = express();
 
+app.set('port', process.env.PORT || 8080);
+
+app.listen(app.get('port'));
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
