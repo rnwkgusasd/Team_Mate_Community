@@ -3,9 +3,6 @@ var createError = require('http-errors');
 var router = express.Router();
 const Signup = require('../../../models/signupM')
 
-
-
-
 module.exports = router;
 
 router.get('/', function(req, res, next) {
