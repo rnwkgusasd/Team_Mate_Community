@@ -14,10 +14,12 @@ import Drawer from "@material-ui/core/Drawer";
 import Grid from '@material-ui/core/Grid';
 // @material-ui/icons
 import Menu from "@material-ui/icons/Menu";
+import ReactDOM from 'react-dom';
+
 // core components
 import headerStyle from "assets/jss/material-kit-react/components/headerStyle.jsx";
 import AddDialog from "components/Header/AddNoteDialog.js";
-
+import LoginPage from "views/LoginPage/LoginPage.jsx";
 import { Link } from "react-router-dom";
 
 class Header extends React.Component {
@@ -76,6 +78,24 @@ class Header extends React.Component {
       [classes.fixed]: fixed
     });
     const brandComponent = <Button href="/" className={classes.title}>{brand}</Button>;
+    const loginButton=(
+        <Link to={"/login-page"} className={classes.link}>
+                  <Button>
+                    Login
+                  </Button>
+        </Link>
+    );
+    const logoutButton = (
+      <div>
+        {this.props.LoggedName}
+        <Link to={"/"} className={classes.link}>
+                  <Button onClick={function() { localStorage.clear(); alert("로그아웃 성공") }}>
+                    Logout
+                  </Button>
+        </Link>
+        <AddDialog />
+      </div>
+    );
     return (
       <AppBar className={appBarClasses}>
         <Toolbar className={classes.container}>
@@ -95,13 +115,11 @@ class Header extends React.Component {
                 {rightLinks}
               </Hidden>
             ) : (
-              <Grid>
-                <Link to={"/login-page"} className={classes.link}>
-                  <Button>
-                    Login
-                  </Button>
-                </Link>
-                <AddDialog />
+              <Grid container
+              direction="column"
+              alignItems="center" justify="center">
+                { this.props.isLoggedIn ? logoutButton : loginButton }
+                
               </Grid>
             )}
           </Hidden>
@@ -178,6 +196,15 @@ Header.propTypes = {
       "dark"
     ]).isRequired
   })
+};
+Header.propTypes = {
+  LoggedName: PropTypes.string,
+  isLoggedIn: PropTypes.bool,
+//  onLogout: PropTypes.func
+};
+
+Header.defaultProps = {
+ // onLogout: () => { console.error("logout function not defined");}
 };
 
 export default withStyles(headerStyle)(Header);

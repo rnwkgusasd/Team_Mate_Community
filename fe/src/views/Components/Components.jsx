@@ -20,8 +20,8 @@ import CustomDropdown from 'components/CustomDropdown/CustomDropdown.jsx';
 
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 import Favorite from '@material-ui/icons/Favorite';
-
-
+import ReactDOM from 'react-dom';
+import { Provider  } from 'react-redux';
 import componentsStyle from "assets/jss/material-kit-react/views/components.jsx";
 import ChatButton from "views/Components/Sections/ChatButton"
 //import { Card } from "@material-ui/core";
@@ -29,6 +29,12 @@ import ChatButton from "views/Components/Sections/ChatButton"
 class Components extends React.Component {
 
   state = <FavoriteBorder />;
+  state1 = {
+    LoggedName:"",
+    isLoggedIn:true
+  };
+  
+  // this.state1.isLoggedIn=false; 값 변경시 사용
   checkLike = false;
 
   ChangeLike = () => {
@@ -41,15 +47,17 @@ class Components extends React.Component {
       this.setState(<Favorite />);
     }
   }
-
+  setlogedin=()=>{
+    this.state1.isLoggedIn=localStorage.getItem('logined')?true:false
+    this.state1.LoggedName=localStorage.getItem('logined')
+  }
   render() {
     const { classes, ...rest } = this.props;
     const cardStyle = {width:"60rem", height:"30rem", margin:"5rem"};
     const LikeButton = this.state;
-
-    return (
-      <div>
-        <Header
+    this.setlogedin();    
+    const logedin_header=(
+      <Header
           brand="GSM ASSEMBLE"
           fixed
           color="transparent"
@@ -57,8 +65,28 @@ class Components extends React.Component {
             height: 400,
             color: "white"
           }}
+          LoggedName={this.state1.LoggedName}
+          isLoggedIn={true}
           {...rest}
         />
+    )
+    const logedout_header=(
+      <Header
+          brand="GSM ASSEMBLE"
+          fixed
+          color="transparent"
+          changeColorOnScroll={{
+            height: 400,
+            color: "white"
+          }}
+          isLoggedIn={false}
+          {...rest}
+        />
+    )
+
+    return (
+      <div>
+        {this.state1.isLoggedIn ? logedin_header : logedout_header}
         <Parallax image={require("assets/img/bg.jpg")}>
           <div className={classes.container}>
             <GridContainer>

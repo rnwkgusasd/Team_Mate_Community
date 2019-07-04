@@ -77,10 +77,10 @@ mongoose.connect('mongodb://localhost:27017/api', { useNewUrlParser: true }, (er
    if (err) return console.error(err)
    console.log('mongoose connected!')
 
-   // //쓰기
-   // User.create({ name: '하하' })
-   //     .then(r => console.log(r))
-   //      .catch(e => console.error(e))
+//   계정 추가 쓰기
+UserData.create({ name:"홍길동",userID:"abcd1234",  userPW :"1234", likeDoc:[] })
+        .then(r => console.log(r))
+        .catch(e => console.error(e))
     
 
    //읽기
