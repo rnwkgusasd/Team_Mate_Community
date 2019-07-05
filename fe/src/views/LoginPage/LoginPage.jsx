@@ -161,7 +161,8 @@ class LoginPage extends React.Component {
           console.log("dd",this.state.username);  
           alert('로그인 완료')
           localStorage.clear();
-          localStorage.setItem('logined',this.state.username)
+          localStorage.setItem('logedin',this.state.username)
+          localStorage.setItem('id',this.state.userID)
           console.log(this.props.isLoggedIn)
           this.props.history.push('/');
         }
@@ -177,4 +178,4 @@ LoginPage.propTypes = {
   classes: PropTypes.object
 };
 
-export default withStyles(loginPageStyle)(LoginPage); 
+export default withStyles(loginPageStyle)(LoginPage);

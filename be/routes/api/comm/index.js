@@ -15,8 +15,8 @@ router.get('/', function(req, res, next) {
 });
 
   router.post('/', (req, res, next) => {
-    const { title, desc, writer, docNum, viewCnt, likeCnt } = req.body
-    const u = new CommDoc({ title, desc, writer, docNum, viewCnt, likeCnt })
+    const { title, desc, writerid, writer, docNum, viewCnt, likeCnt } = req.body
+    const u = new CommDoc({ title, desc, writerid, writer, docNum, viewCnt, likeCnt })
       u.save()
         .then(r => {
           res.send({ success: true, msg: r })
@@ -31,8 +31,8 @@ router.get('/', function(req, res, next) {
   });
   router.put('/:id', (req, res, next) => {
     const id = req.params.id
-    const { title, desc, writer, docNum, viewCnt, likeCnt } = req.body
-    User.updateOne({ _id: id }, { $set: { title, desc, writer, docNum, viewCnt, likeCnt }})
+    const { title, desc,writerid, writer, docNum, viewCnt, likeCnt } = req.body
+    CommDoc.updateOne({ _id: id }, { $set: { title, desc,writerid, writer, docNum, viewCnt, likeCnt }})
       .then(r => {
         res.send({ success: true, msg: r })
       })
@@ -43,7 +43,8 @@ router.get('/', function(req, res, next) {
   })
   router.delete('/:id', (req, res, next) => { 
     const id = req.params.id
-    User.deleteOne({ _id: id })
+    console.log("id",id)
+    CommDoc.deleteOne({ _id: id })
       .then(r => {
         res.send({ success: true, msg: r })
       })

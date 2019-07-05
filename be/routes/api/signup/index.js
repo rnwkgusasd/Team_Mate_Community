@@ -6,7 +6,6 @@ const Signup = require('../../../models/signupM')
 module.exports = router;
 
 router.get('/', function(req, res, next) {
-
     Signup.find()
       .then(r => {
         res.send({ success : true, users: r})

@@ -86,14 +86,14 @@ class Header extends React.Component {
         </Link>
     );
     const logoutButton = (
-      <div>
-        {this.props.LoggedName}
-        <Link to={"/"} className={classes.link}>
+      <div style={{display:'flex',justifyContent: 'center'}}>
+        <p style={{color:"black",marginTop:"10px",marginRight:"18px",fontSize:"17px"}}>{this.props.LoggedName}&nbsp;님</p>
+        <Link to={"/"} className={classes.link} style={{marginTop:"5px",marginRight:"0px"}}>
                   <Button onClick={function() { localStorage.clear(); alert("로그아웃 성공") }}>
                     Logout
                   </Button>
         </Link>
-        <AddDialog />
+        <div style={{marginTop:"4px"}}><AddDialog /></div>
       </div>
     );
     return (

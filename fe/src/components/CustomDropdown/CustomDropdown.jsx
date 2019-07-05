@@ -1,4 +1,5 @@
 import React from "react";
+import axios from 'axios';
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // nodejs library to set properties for components
@@ -19,12 +20,15 @@ import Popper from "@material-ui/core/Popper";
 import Button from "components/CustomButtons/Button.jsx";
 
 import customDropdownStyle from "assets/jss/material-kit-react/components/customDropdownStyle.jsx";
+import AddDialog from "components/Header/AddNoteDialog.js";
 
 class CustomDropdown extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: false
+      open: false,
+      id:0,
+      editdialog:false
     };
   }
   handleClick = () => {
@@ -36,6 +40,23 @@ class CustomDropdown extends React.Component {
       this.props.onClick(param);
     }
   };
+  desctask = taskname=>{
+    if(taskname=="Edit"){
+      AddDialog.setOpen(true)
+    }
+    if(taskname=="Remove"){
+      this.state.id=localStorage.getItem('desc_'+this.props.id)
+      console.log(this.state.id,"dd")
+      axios.delete(`http://localhost:8080/api/comm/${this.state.id}`)
+        .then((r) => {
+          alert("삭제 성공")
+          window.location.reload()
+        })
+        .catch((e) => {
+          console.error(e.message)
+        })
+    }
+  }
   handleCloseAway = event => {
     if (this.anchorEl.contains(event.target)) {
       return;
@@ -43,6 +64,7 @@ class CustomDropdown extends React.Component {
     this.setState({ open: false });
   };
   render() {
+    
     const { open } = this.state;
     const {
       classes,
@@ -84,6 +106,7 @@ class CustomDropdown extends React.Component {
         break;
     }
     return (
+
       <div>
         <div>
           <Button
@@ -154,7 +177,7 @@ class CustomDropdown extends React.Component {
                       return (
                         <MenuItem
                           key={key}
-                          onClick={() => this.handleClose(prop)}
+                          onClick={(r) => this.desctask(r.nativeEvent.target.outerText)}
                           className={dropdownItem}
                         >
                           {prop}
