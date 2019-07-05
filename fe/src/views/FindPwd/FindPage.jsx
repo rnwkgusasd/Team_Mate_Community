@@ -23,6 +23,8 @@ import loginPageStyle from "assets/jss/material-kit-react/views/loginPage.jsx";
 
 import image from "assets/img/bg2.jpg";
 
+import axios from 'axios';
+
 class LoginPage extends React.Component {
   constructor(props) {
     super(props);
@@ -40,6 +42,27 @@ class LoginPage extends React.Component {
       700
     );
   }
+  getPwd(){
+    axios.get('http://localhost:8080/api/signup')
+    .then((r)=>{
+      let selectUser = null
+        this.setState({ allUsers: r.data.users});
+        this.state.allUsers.forEach(user =>{
+          if(user.userID === this.state.userID){
+            selectUser = user
+            this.setState({ username: user.name});
+          }
+        })
+        if (selectUser === null) alert('입력하신 이메일이 없습니다')
+        else{
+          alert(selectUser.userPW)
+          }
+    })
+    .catch((e)=>{
+      console.error(e.message)
+    })
+  }
+
   render() {
     const { classes, ...rest } = this.props;
     return (
@@ -91,7 +114,7 @@ class LoginPage extends React.Component {
                       </Link>
                     </CardFooter>
                     <CardFooter className={classes.cardFooter}>
-                      <Button round color="info" size="lg">
+                      <Button round color="info" size="lg" onClick={this.getPwd}>
                         Find
                       </Button>
                     </CardFooter>
@@ -104,10 +127,12 @@ class LoginPage extends React.Component {
       </div>
     );
   }
+  
 }
 
 LoginPage.propTypes = {
   classes: PropTypes.object
 };
+
 
 export default withStyles(loginPageStyle)(LoginPage);
