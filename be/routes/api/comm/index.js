@@ -15,8 +15,8 @@ router.get('/', function(req, res, next) {
 });
 
   router.post('/', (req, res, next) => {
-    const { title, desc, writer, docNum, viewCnt, likeCnt } = req.body
-    const u = new CommDoc({ title, desc, writer, docNum, viewCnt, likeCnt })
+    const { title, desc, writer, viewCnt, likeCnt } = req.body
+    const u = new CommDoc({ title, desc, writer, viewCnt, likeCnt })
       u.save()
         .then(r => {
           res.send({ success: true, msg: r })

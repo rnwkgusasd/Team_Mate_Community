@@ -11,6 +11,8 @@ import Add from '@material-ui/icons/NoteAdd';
 import { InputGroup } from 'react-bootstrap';
 import { FormControl } from 'react-bootstrap';
 
+import axios from 'axios';
+
 export default function FormDialog() {
   const [open, setOpen] = React.useState(false);
 
@@ -19,6 +21,11 @@ export default function FormDialog() {
   }
 
   function handleClose() {
+    setOpen(false);
+  }
+  function Save(){
+    //세이브
+    
     setOpen(false);
   }
 
@@ -46,7 +53,7 @@ export default function FormDialog() {
           <Button onClick={handleClose} color="gray">
             Cancel
           </Button>
-          <Button onClick={handleClose} color="gray">
+          <Button onClick={Save} color="gray">
             Save
           </Button>
         </DialogActions>
