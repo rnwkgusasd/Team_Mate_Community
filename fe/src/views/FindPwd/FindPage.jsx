@@ -30,8 +30,11 @@ class LoginPage extends React.Component {
     super(props);
     // we use this to make the card to appear after the page has been rendered
     this.state = {
-      cardAnimaton: "cardHidden"
+      cardAnimaton: "cardHidden",
+      userID: ""
     };
+    this.getPwd=this.getPwd.bind(this);
+    this.handleChange=this.handleChange.bind(this);
   }
   componentDidMount() {
     // we add a hidden class to the card and after 700 ms we delete it and the transition appears
@@ -42,27 +45,11 @@ class LoginPage extends React.Component {
       700
     );
   }
-  getPwd(){
-    axios.get('http://localhost:8080/api/signup')
-    .then((r)=>{
-      let selectUser = null
-        this.setState({ allUsers: r.data.users});
-        this.state.allUsers.forEach(user =>{
-          if(user.userID === this.state.userID){
-            selectUser = user
-            this.setState({ username: user.name});
-          }
-        })
-        if (selectUser === null) alert('입력하신 이메일이 없습니다')
-        else{
-          alert(selectUser.userPW)
-          }
-    })
-    .catch((e)=>{
-      console.error(e.message)
-    })
+  handleChange(e){
+    let nextState = {};
+    nextState[e.target.name] = e.target.value;
+    this.setState(nextState);
   }
-
   render() {
     const { classes, ...rest } = this.props;
     return (
@@ -97,7 +84,9 @@ class LoginPage extends React.Component {
                           fullWidth: true
                         }}
                         inputProps={{
+                          name: "userID",
                           type: "text",
+                          onChange: this.handleChange,
                           endAdornment: (
                             <InputAdornment position="end">
                               <People className={classes.inputIconsColor} />
@@ -127,6 +116,27 @@ class LoginPage extends React.Component {
       </div>
     );
   }
+  getPwd(){
+    axios.get('http://localhost:8080/api/signup')
+    .then((r)=>{
+      let selectUser = null
+        this.setState({ allUsers: r.data.users});
+        this.state.allUsers.forEach(user =>{
+          if(user.userID === this.state.userID){
+            selectUser = user
+            this.setState({ username: user.name});
+          }
+        })
+        if (selectUser === null) alert('입력하신 이메일이 없습니다')
+        else{
+          alert(selectUser.userPW)
+          }
+    })
+    .catch((e)=>{
+      console.error(e.message)
+    })
+  }
+
   
 }
 
