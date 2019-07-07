@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import axios from 'axios';
 import Dialog from '@material-ui/core/Dialog';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItem from '@material-ui/core/ListItem';
@@ -39,11 +40,27 @@ export default function FullScreenDialog() {
   const [open, setOpen] = React.useState(false);
 
   function handleClickOpen() {
+    
     setOpen(true);
   }
 
   function handleClose() {
     setOpen(false);
+  }
+  function Save(){
+    const text=document.getElementById("regular").value
+    const name=localStorage.getItem("logedin")
+    const id=localStorage.getItem("id")
+    axios.post('http://localhost:8080/api/rpl',{
+      docNum:/*이부분에 값이 넘어와야됨*/0, writerid:id, writername:name, desc:text, rplNum:0})
+    .then((r) => {
+    })
+    .catch((e) => {
+      console.error(e.message)
+    })
+    alert("추가 완료")
+    setOpen(false);
+    window.location.reload();
   }
 
   return (

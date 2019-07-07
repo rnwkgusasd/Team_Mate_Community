@@ -28,19 +28,22 @@ import componentsStyle from "assets/jss/material-kit-react/views/components.jsx"
 import ChatButton from "views/Components/Sections/ChatButton"
 //import { Card } from "@material-ui/core";
 import AddDialog from "components/Header/AddNoteDialog.js";
+import { LocalGasStationRounded } from "@material-ui/icons";
 
 class Components extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
+      LoggedId:"",
       LoggedName:"",
       isLoggedIn:false,
       items: [],
       items_end: 3,
       hasMore: true,
       desc:[],
-      change:true
+      change:true,
+      dropdownopen:false,
     };
   }
   checkLike = false;
@@ -76,6 +79,7 @@ class Components extends React.Component {
   setlogedin=()=>{
     this.state.isLoggedIn=localStorage.getItem('logedin')?true:false
     this.state.LoggedName=localStorage.getItem('logedin')
+    this.state.LoggedId=localStorage.getItem('id')
   }
   updateState(){
     this.state.change=true
@@ -171,23 +175,24 @@ class Components extends React.Component {
               <GridItem>
                 <Card style={cardStyle}>
                   <CardHeader color="danger" style={{display: 'flex'}}>
-                    <p style={{fontSize:"17px",marginTop:"12px", marginRight:"725px", marginLeft:"12px"}}>작성자:&nbsp;{i.writer}</p>
-                    <CustomDropdown
-                      id={index}
-                      dropdownList={[
-                        "Edit",
-                        {divider: true},
-                        "Remove"
-                      ]} 
-                      buttonProps={{
-                        round: true,
-                        justIcon: true,
-                        simple: true
-                      }}                    
-                    />
+                    <p style={{fontSize:"22px",marginTop:"12px", marginRight:"700px", marginLeft:"12px"}}>작성자:&nbsp;{i.writer}</p>
+                    {this.state.desc[index].writerid===this.state.LoggedId?
+                      <CustomDropdown
+                        open={false}
+                        id={index}
+                        dropdownList={[
+                          "Edit",
+                          {divider: true},
+                          "Remove"
+                        ]} 
+                        buttonProps={{
+                          round: true,
+                          justIcon: true,
+                          simple: true
+                        }}/> : null}                        
                   </CardHeader>
                   <CardBody style={{margin:"20px"}}>
-                    <div>{i.desc}</div>
+                    <div><p style={{fontSize:"17px"}}>{i.desc}</p></div>
                   </CardBody>
                   <CardFooter>
                     <Button justIcon round color="rose" onClick={() => {this.ChangeLike()}}>

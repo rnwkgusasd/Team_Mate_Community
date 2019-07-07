@@ -78,9 +78,12 @@ mongoose.connect('mongodb://localhost:27017/api', { useNewUrlParser: true }, (er
    console.log('mongoose connected!')
 
 //   계정 추가 쓰기
-// UserData.create({ name:"홍길동",userID:"abcd1234",  userPW :"1234", likeDoc:[] })
-//         .then(r => console.log(r))
-//         .catch(e => console.error(e))
+UserData.create({ name:"홍길동",userID:"abcd1234",  userPW :"1234", likeDoc:[] })
+        .then(r => console.log(r))
+        .catch(e => console.error(e))
+UserData.create({ name:"김철수",userID:"abcd5678",  userPW :"5678", likeDoc:[] })
+        .then(r => console.log(r))
+        .catch(e => console.error(e))
     
 
    //읽기

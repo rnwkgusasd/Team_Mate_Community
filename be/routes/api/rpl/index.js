@@ -15,8 +15,8 @@ router.get('/', function(req, res, next) {
 });
 
   router.post('/', (req, res, next) => {
-    const { docNum,writer,desc,rplNum } = req.body
-    const u = new CommRpl({ docNum,writer,desc,rplNum })
+    const { docNum,writerid,writername,desc,rplNum } = req.body
+    const u = new CommRpl({docNum,writerid,writername,desc,rplNum})
       u.save()
         .then(r => {
           res.send({ success: true, msg: r })
@@ -31,8 +31,8 @@ router.get('/', function(req, res, next) {
   });
   router.put('/:id', (req, res, next) => {
     const id = req.params.id
-    const { docNum,writer,desc,rplNum } = req.body
-    User.updateOne({ _id: id }, { $set: { docNum,writer,desc,rplNum }})
+    const {docNum,writerid,writername,desc,rplNum} = req.body
+    User.updateOne({ _id: id }, { $set: { docNum,writerid,writername,desc,rplNum }})
       .then(r => {
         res.send({ success: true, msg: r })
       })
